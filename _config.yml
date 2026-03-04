@@ -1,6 +1,6 @@
 title:            喔滴博客
-markdown:         rdiscount
+markdown:         kramdown
 safe:             false
-author:           邱金武
+author:           kingqiu
 baseurl:          /
 permalink:        /blog/:year/:month/:day/:title

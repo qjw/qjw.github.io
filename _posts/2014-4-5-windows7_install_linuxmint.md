@@ -16,30 +16,32 @@ category: other
 
 若boot.ini不生效，使用bcedit
 
-	@echo off
-	cls
-	echo.
-	echo   必须以管理员运行
-	echo.
-	pause
-	set title=Grub4DOS
-	set vid=
-	bcdedit /create /d "%title%" /application bootsector >vid.ini
-	for,/f,"tokens=2 delims={",%%i,In (vid.ini) Do (
-		set vida=%%i
-	)
-	for,/f,"tokens=1 delims=}",%%i,In ("%vida%") Do (
-		set vid={% raw %}{%%i}
-	)
-	echo %title% created as %vid%
-	bcdedit /set %vid% device  partition=c: >nul
-	bcdedit /set %vid% path \gsldr.mbr >nul
-	bcdedit /displayorder %vid% /addlast >nul
-	echo.
-	pause
-			bcdedit /enum
-	pause
-	:exit
+``` bat
+@echo off
+cls
+echo.
+echo   必须以管理员运行
+echo.
+pause
+set title=Grub4DOS
+set vid=
+bcdedit /create /d "%title%" /application bootsector >vid.ini
+for,/f,"tokens=2 delims={",%%i,In (vid.ini) Do (
+	set vida=%%i
+)
+for,/f,"tokens=1 delims=}",%%i,In ("%vida%") Do (
+	set vid={% raw %}{%%i}{% endraw %}
+)
+echo %title% created as %vid%
+bcdedit /set %vid% device  partition=c: >nul
+bcdedit /set %vid% path \gsldr.mbr >nul
+bcdedit /displayorder %vid% /addlast >nul
+echo.
+pause
+		bcdedit /enum
+pause
+:exit
+```
 
 ##配置grub
 
